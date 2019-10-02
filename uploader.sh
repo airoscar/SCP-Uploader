@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 echo "#############################"
 echo "##### Auto File Uploader ####"
@@ -62,17 +62,17 @@ function setDestination {
 function upload {
 	uploadFrom=$source
 	uploadTo=$destination
-	command="rsync -avz -e ssh --exclude \"${scriptFileName}\" --exclude \"*.git\" ${uploadFrom} ${uploadTo}"
-	echo $command
-	eval $command
 	
+	eval "${currentDir}/connection.sh ${remoteServer} ${username} ${password} ${uploadFrom} ${uploadTo}"
+	
+	echo "Sync completed."
 }
 
 setServer
 setUser
 setSource
 setDestination
-echo "Auto uploader has been set up to upload from ${source} to ${destination}, press any key to upload, press ESC to exit."
+echo "Auto uploader has been set up, press any key to sync, press ESC to exit: ${command}"
 
 while :
 do
@@ -84,7 +84,6 @@ do
 			break
 			;;
 		*)
-			echo "Uploading.."
 			upload $source $destination $password
 			;;
 	esac
