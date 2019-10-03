@@ -10,9 +10,6 @@ echo "##################################################"
 defaultServer="wgmsrv.ucalgary.ca"
 defaultDestinationFolder="~/"
 
-currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-scriptFileName="${BASH_ARGV[0]}"
-
 function setUser {
 	echo "Enter username (ie: firstname.lastname)"
 	read username
@@ -73,6 +70,8 @@ function upload {
 	
 	echo "Sync completed."
 }
+
+currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 setServer
 setUser
