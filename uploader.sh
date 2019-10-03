@@ -1,9 +1,14 @@
 #!/bin/bash
 
-echo "#############################"
-echo "##### Auto File Uploader ####"
-echo "##### wgmsrv.ucalgary.ca ####"
-echo "#############################"
+echo "##################################################"
+echo "#              Bash Auto Uploader                #"
+echo "#             Created by Oscar Chen              #"
+echo "# https://github.com/airoscar/bash-auto-uploader #"
+echo "##################################################"
+
+
+defaultServer="wgmsrv.ucalgary.ca"
+defaultDestinationFolder="~/"
 
 currentDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 scriptFileName="${BASH_ARGV[0]}"
@@ -17,16 +22,16 @@ function setUser {
 }
 
 function setServer {
-	echo "Enter server address (Default: wgmsrv.ucalgary.ca)"
+	echo "Enter server address (Default: ${defaultServer})"
 	read remoteServer
 	if [[ -z "$remoteServer" ]]; then
-		remoteServer="wgmsrv.ucalgary.ca"
+		remoteServer=$defaultServer
 	fi
 }
 
 function setSource {
 
-	echo "Set up source, select option below: (Default: 1)"
+	echo "Set up source, select option below:"
 	OPTIONS=("All files in current directory" 
 		"Specify a path")
 	select opt in "${OPTIONS[@]}" 
@@ -43,18 +48,18 @@ function setSource {
 				break
 				;;
 			*)
-				source=$currentDir
+				echo "Invalid selection."
 				;;
 		esac
 	done
 }
 
 function setDestination {
-	echo "Enter destination path: (Default: ~/)"
+	echo "Enter destination path: (Default: ${defaultDestinationFolder})"
 	read destinationFolder
 
 	if [[ -z "$destinationFolder" ]]; then
-		destinationFolder="~/"
+		destinationFolder=$defaultDestinationFolder
 	fi
 
 	destination="${username}@${remoteServer}:${destinationFolder}"
