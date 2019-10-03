@@ -8,7 +8,7 @@ set password [lindex $argv 2]
 set uploadFrom [lindex $argv 3]
 set uploadTo [lindex $argv 4]
 
-spawn rsync -avz -e "ssh" --exclude "*.git" ${uploadFrom} "${uploadTo}"
+spawn rsync -avz -e "ssh" --exclude "*.git" --exclude ".DS_Store" --exclude "connection.sh" --exclude "uploader.sh" ${uploadFrom} "${uploadTo}"
 
 expect "${username}@${remoteServer}'s password: "
  

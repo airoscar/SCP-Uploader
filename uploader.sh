@@ -26,7 +26,7 @@ function setServer {
 
 function setSource {
 
-	echo "Set up source:"
+	echo "Set up source, select option below: (Default: 1)"
 	OPTIONS=("All files in current directory" 
 		"Specify a path")
 	select opt in "${OPTIONS[@]}" 
@@ -43,7 +43,8 @@ function setSource {
 				break
 				;;
 			*)
-				echo "Invalid selection"
+				source=$currentDir
+				;;
 		esac
 	done
 }
